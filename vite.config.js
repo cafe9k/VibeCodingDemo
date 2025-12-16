@@ -7,6 +7,11 @@ export default defineConfig({
   // GitHub Pages 部署时，base 需要设置为仓库名
   // 本地开发使用 '/'，生产环境使用 '/仓库名/'
   base: process.env.NODE_ENV === 'production' ? '/VibeCodingDemo/' : '/',
+  // 确保环境变量被正确注入到客户端代码
+  define: {
+    'import.meta.env.VITE_SUPABASE_URL': JSON.stringify(process.env.VITE_SUPABASE_URL),
+    'import.meta.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(process.env.VITE_SUPABASE_ANON_KEY),
+  },
   server: {
     host: '0.0.0.0', // 允许外部访问
     port: 5173,
