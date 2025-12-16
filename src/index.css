@@ -2,29 +2,74 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  
-  color-scheme: light dark;
-  color: rgba(0, 0, 0, 0.87);
-  background-color: #ffffff;
-  
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  :root {
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    
+    color-scheme: light;
+    color: #333333;
+    background-color: #ffffff;
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #F5F5F5;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #333333;
+    font-weight: 600;
+  }
+
+  a {
+    color: #0086F6;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: #0066CC;
+  }
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-}
+@layer components {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  .btn-ctrip {
+    @apply bg-ctrip-orange text-white px-6 py-3 rounded-ctrip-md font-medium transition-smooth;
+    @apply hover:bg-[#E65500] hover:shadow-card-hover;
+  }
+
+  .btn-ctrip-outline {
+    @apply border-2 border-ctrip-blue text-ctrip-blue px-6 py-3 rounded-ctrip-md font-medium transition-smooth;
+    @apply hover:bg-ctrip-light-blue;
+  }
+
+  .card-ctrip {
+    @apply bg-white rounded-ctrip-lg shadow-card transition-smooth;
+    @apply hover:shadow-card-hover hover:-translate-y-1;
+  }
+
+  .input-ctrip {
+    @apply w-full h-14 px-4 border border-ctrip-border rounded-ctrip-md;
+    @apply focus:outline-none focus:border-ctrip-blue focus:ring-2 focus:ring-ctrip-light-blue;
+    @apply transition-smooth;
+  }
 }
 

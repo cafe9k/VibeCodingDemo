@@ -102,29 +102,29 @@ function TrainList() {
   }
   
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold">{from} → {to}</h1>
-        <p className="text-base-content/70">{date} | 找到 {trains?.length || 0} 个车次</p>
-      </div>
-      
-      {trains && trains.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-lg">暂无符合条件的车次</p>
+    <div className="min-h-screen bg-ctrip-bg">
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-ctrip-gray-dark">{from} → {to}</h1>
+          <p className="text-ctrip-gray-light mt-1">{date} | 找到 {trains?.length || 0} 个车次</p>
         </div>
-      ) : (
-        <div className="space-y-4">
-          {trains?.map((train) => (
-            <div key={train.id} className="card bg-base-100 shadow">
-              <div className="card-body">
-                <div className="flex flex-col md:flex-row justify-between gap-4">
+        
+        {trains && trains.length === 0 ? (
+          <div className="bg-white rounded-ctrip-lg shadow-card p-12 text-center">
+            <p className="text-lg text-ctrip-gray">暂无符合条件的车次</p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {trains?.map((train) => (
+              <div key={train.id} className="card-ctrip p-6">
+                <div className="flex flex-col md:flex-row justify-between gap-6">
                   <div className="flex-1">
                     <div className="flex items-center gap-6">
-                      <div className="text-center">
-                        <span className={`badge badge-lg ${
-                          train.train_type === 'G' ? 'badge-primary' :
-                          train.train_type === 'D' ? 'badge-secondary' :
-                          'badge-neutral'
+                      <div>
+                        <span className={`px-4 py-2 rounded-ctrip-md font-bold text-white text-lg ${
+                          train.train_type === 'G' ? 'bg-ctrip-blue' :
+                          train.train_type === 'D' ? 'bg-ctrip-success' :
+                          'bg-ctrip-gray'
                         }`}>
                           {train.train_number}
                         </span>
@@ -132,110 +132,123 @@ function TrainList() {
                       
                       <div className="flex-1">
                         <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-2xl font-bold">{formatTime(train.departure_time)}</p>
-                            <p className="text-sm text-base-content/70">{train.departure_station}</p>
+                          <div className="text-center">
+                            <p className="text-3xl font-bold text-ctrip-gray-dark">{formatTime(train.departure_time)}</p>
+                            <p className="text-sm text-ctrip-gray mt-1">{train.departure_station}</p>
                           </div>
                           
-                          <div className="text-center px-4">
-                            <p className="text-xs text-base-content/70 mb-1">
-                              {formatDuration(train.duration)}
-                            </p>
-                            <div className="w-24 h-px bg-base-300"></div>
+                          <div className="flex-1 px-6">
+                            <div className="flex flex-col items-center">
+                              <p className="text-xs text-ctrip-gray-light mb-1">
+                                {formatDuration(train.duration)}
+                              </p>
+                              <div className="w-full h-px border-t-2 border-dashed border-ctrip-border relative">
+                                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-ctrip-success rounded-full"></div>
+                                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-ctrip-success rounded-full"></div>
+                              </div>
+                            </div>
                           </div>
                           
-                          <div className="text-right">
-                            <p className="text-2xl font-bold">{formatTime(train.arrival_time)}</p>
-                            <p className="text-sm text-base-content/70">{train.arrival_station}</p>
+                          <div className="text-center">
+                            <p className="text-3xl font-bold text-ctrip-gray-dark">{formatTime(train.arrival_time)}</p>
+                            <p className="text-sm text-ctrip-gray mt-1">{train.arrival_station}</p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="flex flex-wrap gap-2 items-center">
+                  <div className="flex flex-wrap gap-3 items-center justify-end">
                     {train.seats && Object.entries(train.seats).map(([type, info]) => (
                       <button
                         key={type}
-                        className="btn btn-outline btn-sm"
+                        className={`px-4 py-3 border-2 rounded-ctrip-md transition-smooth ${
+                          info.available === 0 
+                            ? 'border-gray-300 bg-gray-100 text-gray-400 cursor-not-allowed'
+                            : 'border-ctrip-blue hover:bg-ctrip-light-blue cursor-pointer'
+                        }`}
                         onClick={() => {
-                          setSelectedTrain(train)
-                          setSelectedSeat({ type, ...info })
-                          document.getElementById('booking_modal').showModal()
+                          if (info.available > 0) {
+                            setSelectedTrain(train)
+                            setSelectedSeat({ type, ...info })
+                            document.getElementById('booking_modal').showModal()
+                          }
                         }}
                         disabled={info.available === 0}
                       >
-                        <div className="text-left">
-                          <p className="font-bold">{type}</p>
-                          <p className="text-error">{formatPrice(info.price)}</p>
-                          <p className="text-xs">{info.available > 0 ? `余${info.available}` : '无票'}</p>
+                        <div className="text-center">
+                          <p className="font-bold text-ctrip-gray-dark text-sm">{type}</p>
+                          <p className="text-ctrip-orange font-bold text-lg my-1">{formatPrice(info.price)}</p>
+                          <p className="text-xs text-ctrip-gray-light">
+                            {info.available > 0 ? `余${info.available}张` : '无票'}
+                          </p>
                         </div>
                       </button>
                     ))}
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
       
-      {/* 预订模态框 */}
-      <dialog id="booking_modal" className="modal">
-        <div className="modal-box">
-          <form method="dialog">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-          </form>
-          
-          <h3 className="font-bold text-lg mb-4">填写乘客信息</h3>
-          
-          {selectedTrain && selectedSeat && (
-            <div className="mb-4 p-4 bg-base-200 rounded-lg">
-              <p className="font-bold">{selectedTrain.train_number}</p>
-              <p className="text-sm">{selectedTrain.departure_station} → {selectedTrain.arrival_station}</p>
-              <p className="text-sm">{formatTime(selectedTrain.departure_time)} - {formatTime(selectedTrain.arrival_time)}</p>
-              <p className="text-lg font-bold text-error mt-2">{selectedSeat.type} {formatPrice(selectedSeat.price)}</p>
-            </div>
-          )}
-          
-          <form onSubmit={handleBooking}>
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text">乘客姓名</span>
-              </label>
-              <input
-                type="text"
-                placeholder="请输入姓名"
-                className="input input-bordered"
-                value={passengerName}
-                onChange={(e) => setPassengerName(e.target.value)}
-                required
-              />
-            </div>
+        {/* 预订模态框 */}
+        <dialog id="booking_modal" className="modal">
+          <div className="modal-box max-w-lg bg-white rounded-ctrip-xl">
+            <form method="dialog">
+              <button className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3 text-ctrip-gray hover:text-ctrip-gray-dark">✕</button>
+            </form>
             
-            <div className="form-control mb-4">
-              <label className="label">
-                <span className="label-text">身份证号</span>
-              </label>
-              <input
-                type="text"
-                placeholder="请输入身份证号"
-                className="input input-bordered"
-                value={idCard}
-                onChange={(e) => setIdCard(e.target.value)}
-                required
-              />
-            </div>
+            <h3 className="font-bold text-xl text-ctrip-gray-dark mb-6">填写乘客信息</h3>
             
-            <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
-              {submitting ? <span className="loading loading-spinner"></span> : '提交订单'}
-            </button>
+            {selectedTrain && selectedSeat && (
+              <div className="mb-6 p-4 bg-ctrip-light-blue rounded-ctrip-lg">
+                <p className="font-bold text-lg text-ctrip-gray-dark">{selectedTrain.train_number}</p>
+                <p className="text-sm text-ctrip-gray mt-1">{selectedTrain.departure_station} → {selectedTrain.arrival_station}</p>
+                <p className="text-sm text-ctrip-gray">{formatTime(selectedTrain.departure_time)} - {formatTime(selectedTrain.arrival_time)}</p>
+                <p className="text-xl font-bold text-ctrip-orange mt-3">{selectedSeat.type} {formatPrice(selectedSeat.price)}</p>
+              </div>
+            )}
+            
+            <form onSubmit={handleBooking}>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-ctrip-gray mb-2">
+                  乘客姓名
+                </label>
+                <input
+                  type="text"
+                  placeholder="请输入姓名"
+                  className="input-ctrip"
+                  value={passengerName}
+                  onChange={(e) => setPassengerName(e.target.value)}
+                  required
+                />
+              </div>
+              
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-ctrip-gray mb-2">
+                  身份证号
+                </label>
+                <input
+                  type="text"
+                  placeholder="请输入身份证号"
+                  className="input-ctrip"
+                  value={idCard}
+                  onChange={(e) => setIdCard(e.target.value)}
+                  required
+                />
+              </div>
+              
+              <button type="submit" className="btn-ctrip w-full py-4" disabled={submitting}>
+                {submitting ? <span className="loading loading-spinner"></span> : '提交订单'}
+              </button>
+            </form>
+          </div>
+          <form method="dialog" className="modal-backdrop">
+            <button>关闭</button>
           </form>
-        </div>
-        <form method="dialog" className="modal-backdrop">
-          <button>关闭</button>
-        </form>
-      </dialog>
+        </dialog>
+      </div>
     </div>
   )
 }
