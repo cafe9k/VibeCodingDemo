@@ -40,6 +40,9 @@ jobs:
       - name: Build
         run: |
           echo "开始构建..."
+          echo "检查环境变量..."
+          echo "VITE_SUPABASE_URL 长度: ${#VITE_SUPABASE_URL}"
+          echo "VITE_SUPABASE_ANON_KEY 长度: ${#VITE_SUPABASE_ANON_KEY}"
           npm run build
         env:
           NODE_ENV: production
