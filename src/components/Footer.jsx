@@ -91,7 +91,7 @@ function Footer() {
       <div className="border-t border-gray-700 py-6">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-gray-500">
-            © 2024 携程旅行 Demo. All rights reserved. | MVP项目仅供学习使用
+            © 2024 无线旅行 Demo. All rights reserved. | MVP项目仅供学习使用
           </p>
         </div>
       </div>

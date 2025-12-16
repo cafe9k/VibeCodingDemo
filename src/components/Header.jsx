@@ -24,7 +24,7 @@ function Header() {
               <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform backdrop-blur-sm">
                 <span className="text-2xl">✈️</span>
               </div>
-              <span className="hidden sm:block">携程旅行</span>
+              <span className="hidden sm:block">无线旅行</span>
             </Link>
           </div>
           

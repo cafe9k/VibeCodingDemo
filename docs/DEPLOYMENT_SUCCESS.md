@@ -104,7 +104,7 @@ GitHub Actions 会自动触发重新部署，约 2-3 分钟后生效。
 
 ## 🎊 成功！
 
-您的携程旅行 MVP 项目已经成功部署到 GitHub Pages！
+您的无线旅行 MVP 项目已经成功部署到 GitHub Pages！
 
 现在您可以：
 1. ✅ 访问您的网站
