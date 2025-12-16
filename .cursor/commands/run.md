@@ -29,6 +29,7 @@ fi
 
 # 启动开发服务器
 echo "🌟 正在启动开发服务器 (端口: $PORT)..."
-echo "📍 访问地址: http://localhost:$PORT"
+echo "📍 本地访问: http://localhost:$PORT"
+echo "📍 域名访问: http://test.ctripcorp.com:$PORT"
 npm run dev
 

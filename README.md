@@ -44,6 +44,28 @@ npm run dev
 
 访问 http://localhost:5173
 
+## 🌐 在线演示
+
+项目已部署到 GitHub Pages: [在线访问](https://你的用户名.github.io/VibeCodingDemo/)
+
+## 📦 部署到 GitHub Pages
+
+快速部署步骤：
+
+```bash
+# 1. 推送代码到 GitHub
+git add .
+git commit -m "feat: 配置 GitHub Pages"
+git push origin main
+
+# 2. 在 GitHub 仓库设置中启用 GitHub Pages
+# Settings > Pages > Source 选择 "GitHub Actions"
+
+# 3. 等待自动部署完成（约 2-3 分钟）
+```
+
+详细部署说明请参考: [GitHub Pages 部署指南](docs/GITHUB_PAGES_DEPLOY.md)
+
 ## 📚 文档
 
 详细文档请查看 `docs/` 目录：
@@ -52,6 +74,7 @@ npm run dev
 - [Supabase 配置指南](docs/SUPABASE_SETUP.md) - 数据库设置和配置步骤
 - [使用说明](docs/USAGE.md) - 功能使用和操作指南
 - [项目总结](docs/PROJECT_SUMMARY.md) - 项目架构和技术细节
+- [GitHub Pages 部署](docs/GITHUB_PAGES_DEPLOY.md) - GitHub Pages 部署完整指南
 
 ## 项目结构
 
