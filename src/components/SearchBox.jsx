@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import DatePicker from './DatePicker'
 
 function SearchBox({ type = 'flight', onSearch }) {
   const [searchData, setSearchData] = useState({
@@ -87,37 +88,19 @@ function SearchBox({ type = 'flight', onSearch }) {
                   </div>
                 </div>
                 
-                <div className="relative">
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    出发日期
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="date"
-                      className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none text-gray-800 font-medium hover:border-gray-300"
-                      value={searchData.date}
-                      onChange={(e) => handleChange('date', e.target.value)}
-                      required
-                    />
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-500">📅</span>
-                  </div>
-                </div>
+                <DatePicker
+                  label="出发日期"
+                  value={searchData.date}
+                  onChange={(value) => handleChange('date', value)}
+                  required
+                />
                 
                 {searchData.tripType === 'roundTrip' && (
-                  <div className="relative">
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      返程日期
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="date"
-                        className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none text-gray-800 font-medium hover:border-gray-300"
-                        value={searchData.returnDate}
-                        onChange={(e) => handleChange('returnDate', e.target.value)}
-                      />
-                      <span className="absolute right-4 top-1/2 -translate-y-1/2 text-blue-500">📅</span>
-                    </div>
-                  </div>
+                  <DatePicker
+                    label="返程日期"
+                    value={searchData.returnDate}
+                    onChange={(value) => handleChange('returnDate', value)}
+                  />
                 )}
               </div>
             </>
@@ -142,37 +125,19 @@ function SearchBox({ type = 'flight', onSearch }) {
                 </div>
               </div>
               
-              <div className="relative">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  入住日期
-                </label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all outline-none text-gray-800 font-medium hover:border-gray-300"
-                    value={searchData.checkIn}
-                    onChange={(e) => handleChange('checkIn', e.target.value)}
-                    required
-                  />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-purple-500">📅</span>
-                </div>
-              </div>
+              <DatePicker
+                label="入住日期"
+                value={searchData.checkIn}
+                onChange={(value) => handleChange('checkIn', value)}
+                required
+              />
               
-              <div className="relative">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  离店日期
-                </label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all outline-none text-gray-800 font-medium hover:border-gray-300"
-                    value={searchData.checkOut}
-                    onChange={(e) => handleChange('checkOut', e.target.value)}
-                    required
-                  />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-purple-500">📅</span>
-                </div>
-              </div>
+              <DatePicker
+                label="离店日期"
+                value={searchData.checkOut}
+                onChange={(value) => handleChange('checkOut', value)}
+                required
+              />
               
               <div className="relative">
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -228,21 +193,12 @@ function SearchBox({ type = 'flight', onSearch }) {
                 </div>
               </div>
               
-              <div className="relative">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  出发日期
-                </label>
-                <div className="relative">
-                  <input
-                    type="date"
-                    className="w-full px-4 py-3.5 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 transition-all outline-none text-gray-800 font-medium hover:border-gray-300"
-                    value={searchData.date}
-                    onChange={(e) => handleChange('date', e.target.value)}
-                    required
-                  />
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-green-500">📅</span>
-                </div>
-              </div>
+              <DatePicker
+                label="出发日期"
+                value={searchData.date}
+                onChange={(value) => handleChange('date', value)}
+                required
+              />
             </div>
           )}
           
