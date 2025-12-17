@@ -13,6 +13,7 @@ import TrainSearch from './pages/Train/TrainSearch'
 import TrainList from './pages/Train/TrainList'
 import Login from './pages/Auth/Login'
 import Register from './pages/Auth/Register'
+import AuthCallback from './pages/Auth/AuthCallback'
 import Profile from './pages/User/Profile'
 import Orders from './pages/User/Orders'
 import useAuthStore from './store/useAuthStore'
@@ -49,6 +50,7 @@ function App() {
           {/* 用户认证路由 */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
           
           {/* 用户中心路由 */}
           <Route path="/profile" element={<Profile />} />

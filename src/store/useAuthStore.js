@@ -26,10 +26,16 @@ const useAuthStore = create((set) => ({
   },
   
   signUp: async (email, password, nickname) => {
+    // 根据环境动态设置重定向 URL
+    const redirectTo = import.meta.env.PROD 
+      ? 'https://cafe9k.github.io/VibeCodingDemo/auth/callback'
+      : 'http://test.ctripcorp.com:5173/auth/callback'
+    
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
+        emailRedirectTo: redirectTo,
         data: {
           nickname,
         },
