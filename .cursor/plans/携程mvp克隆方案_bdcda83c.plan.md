@@ -1,59 +1,3 @@
----
-name: 携程MVP克隆方案
-overview: 构建一个包含机票、酒店、火车票等多模块的简化版旅行预订平台MVP，使用React+Vite前端，Supabase后端，部署到GitHub Pages
-todos:
-  - id: project-init
-    content: 初始化React+Vite项目，配置TailwindCSS、React Router和环境变量
-    status: completed
-  - id: supabase-setup
-    content: 创建Supabase项目，配置认证，创建数据库表结构和RLS策略
-    status: completed
-  - id: mock-data
-    content: 编写模拟数据生成脚本，导入航班、酒店、火车票数据到Supabase
-    status: completed
-    dependencies:
-      - supabase-setup
-  - id: auth-module
-    content: 实现用户注册/登录功能，集成Supabase Auth和状态管理
-    status: completed
-  - id: layout-nav
-    content: 开发响应式Header/Footer组件和首页布局
-    status: completed
-  - id: flight-module
-    content: 实现机票搜索、列表、详情和订单创建功能
-    status: completed
-    dependencies:
-      - layout-nav
-      - auth-module
-  - id: hotel-module
-    content: 实现酒店搜索、列表、详情和预订功能
-    status: completed
-    dependencies:
-      - layout-nav
-      - auth-module
-  - id: train-module
-    content: 实现火车票搜索、列表和订单创建功能
-    status: completed
-    dependencies:
-      - layout-nav
-      - auth-module
-  - id: order-management
-    content: 实现订单列表、详情查看和模拟支付功能
-    status: completed
-    dependencies:
-      - flight-module
-      - hotel-module
-      - train-module
-  - id: responsive-ui
-    content: 优化移动端适配、加载状态和错误处理
-    status: completed
-  - id: github-deploy
-    content: 配置GitHub Actions工作流，部署到GitHub Pages
-    status: completed
-    dependencies:
-      - responsive-ui
----
-
 # 携程MVP克隆 - 多模块旅行预订平台
 
 ## 项目架构
@@ -67,6 +11,8 @@ graph TB
     Supabase --> Storage[文件存储]
     Frontend --> MockData[模拟数据服务]
 ```
+
+
 
 ## 技术栈
 
@@ -151,6 +97,8 @@ graph TB
 - created_at: timestamp
 ```
 
+
+
 #### flights（航班信息）
 
 ```sql
@@ -168,6 +116,8 @@ graph TB
 - available_seats: integer
 ```
 
+
+
 #### hotels（酒店信息）
 
 ```sql
@@ -183,6 +133,8 @@ graph TB
 - description: text
 ```
 
+
+
 #### hotel_rooms（房型信息）
 
 ```sql
@@ -193,6 +145,8 @@ graph TB
 - max_guests: integer
 - available_rooms: integer
 ```
+
+
 
 #### trains（火车票信息）
 
@@ -208,6 +162,8 @@ graph TB
 - seats: jsonb (各座位类型价格和余票)
 ```
 
+
+
 #### orders（订单表）
 
 ```sql
@@ -220,9 +176,11 @@ graph TB
 - created_at: timestamp
 ```
 
+
+
 ## 项目结构
 
-```
+```javascript
 VibeCodingDemo/
 ├── src/
 │   ├── components/          # 通用组件
@@ -278,75 +236,77 @@ VibeCodingDemo/
 └── README.md
 ```
 
+
+
 ## 实施步骤
 
 ### 阶段一：项目初始化和Supabase配置
 
 1. **创建项目基础结构**
 
-   - 初始化React + Vite项目
-   - 配置TailwindCSS和DaisyUI
-   - 设置路由结构
-   - 配置环境变量
+- 初始化React + Vite项目
+- 配置TailwindCSS和DaisyUI
+- 设置路由结构
+- 配置环境变量
 
 2. **Supabase项目设置**
 
-   - 在Supabase创建新项目
-   - 配置认证策略（邮箱登录）
-   - 创建数据库表结构
-   - 设置Row Level Security策略
-   - 生成模拟数据并导入
+- 在Supabase创建新项目
+- 配置认证策略（邮箱登录）
+- 创建数据库表结构
+- 设置Row Level Security策略
+- 生成模拟数据并导入
 
 ### 阶段二：核心功能开发
 
 3. **用户认证模块**
 
-   - 实现注册/登录页面
-   - 集成Supabase Auth
-   - 创建受保护路由
-   - 实现用户状态管理
+- 实现注册/登录页面
+- 集成Supabase Auth
+- 创建受保护路由
+- 实现用户状态管理
 
 4. **首页和导航**
 
-   - 开发响应式导航栏
-   - 实现首页布局
-   - 添加模块快速入口
+- 开发响应式导航栏
+- 实现首页布局
+- 添加模块快速入口
 
 5. **机票模块**
 
-   - 搜索表单组件
-   - 航班列表展示
-   - 筛选和排序功能
-   - 航班详情页
-   - 订单创建流程
+- 搜索表单组件
+- 航班列表展示
+- 筛选和排序功能
+- 航班详情页
+- 订单创建流程
 
 6. **酒店模块**
 
-   - 酒店搜索功能
-   - 酒店列表和卡片
-   - 酒店详情和房型选择
-   - 预订流程
+- 酒店搜索功能
+- 酒店列表和卡片
+- 酒店详情和房型选择
+- 预订流程
 
 7. **火车票模块**
 
-   - 车次搜索
-   - 车次列表展示
-   - 订单创建
+- 车次搜索
+- 车次列表展示
+- 订单创建
 
 8. **订单管理**
 
-   - 订单列表页
-   - 订单详情展示
-   - 模拟支付功能
-   - 订单状态更新
+- 订单列表页
+- 订单详情展示
+- 模拟支付功能
+- 订单状态更新
 
 ### 阶段三：优化和部署
 
 9. **UI优化和响应式设计**
 
-   - 移动端适配
-   - 加载状态优化
-   - 错误处理
+- 移动端适配
+- 加载状态优化
+- 错误处理
 
 10. **GitHub Pages部署**
 
@@ -369,6 +329,8 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 ```
 
+
+
 ### GitHub Pages部署配置
 
 ```javascript
@@ -381,6 +343,8 @@ export default {
 }
 ```
 
+
+
 ### RLS策略示例
 
 ```sql
@@ -389,6 +353,8 @@ CREATE POLICY "Users can view own orders"
 ON orders FOR SELECT
 USING (auth.uid() = user_id);
 ```
+
+
 
 ## 时间估算
 
@@ -402,24 +368,24 @@ USING (auth.uid() = user_id);
 
 1. **GitHub Pages限制**: 
 
-   - 仅支持静态资源，所有动态功能依赖Supabase
-   - 需要配置SPA路由重定向（404.html）
+- 仅支持静态资源，所有动态功能依赖Supabase
+- 需要配置SPA路由重定向（404.html）
 
 2. **Supabase免费额度**:
 
-   - 500MB数据库存储
-   - 1GB文件存储
-   - 50,000次月度认证用户
+- 500MB数据库存储
+- 1GB文件存储
+- 50,000次月度认证用户
 
 3. **环境变量安全**:
 
-   - Supabase密钥通过GitHub Secrets管理
-   - 本地开发使用.env.local文件
+- Supabase密钥通过GitHub Secrets管理
+- 本地开发使用.env.local文件
 
 4. **模拟数据质量**:
 
-   - 创建真实感强的模拟数据
-   - 覆盖主要城市和热门航线
+- 创建真实感强的模拟数据
+- 覆盖主要城市和热门航线
 
 ## 扩展方向（后续迭代）
 
@@ -427,5 +393,3 @@ USING (auth.uid() = user_id);
 - 添加支付网关（Stripe/PayPal）
 - 实现即时通讯客服
 - 添加用户评价系统
-- 实现价格提醒功能
-- SEO优化（考虑迁移到Next.js）
